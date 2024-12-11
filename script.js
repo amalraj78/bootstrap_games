@@ -58,14 +58,32 @@ function writeDom() {
                             <div class="btn-group">
                                 <button
                                         type="button"
-                                        class="btn btn-sm btn-outline-secondary"
+                                        class="btn btn-sm btn-outline-secondary view"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        data-view-id="${game.id}"
                                 >View</button>
                                 <button
                                         type="button"
-                                        class="btn btn-sm btn-outline-secondary"
+                                        class="btn btn-sm btn-outline-secondary edit"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        data-edit-id="${game.id}"
                                 >Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title" id="exampleModalLabel">Titre du modal</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Détails du jeu
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                             </div>
                         </div>
                     </div>
@@ -73,4 +91,42 @@ function writeDom() {
             </article>`
     })
 }
+
 writeDom()
+
+const editButtons = document.querySelectorAll(".edit")
+editButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        editModal(e.target.getAttribute("data-edit-id"))
+    })
+})
+
+function editModal(gameId) {
+    // console.log(gameId, gamesList)
+    // Trouvez le jeu en fonction de son identifiant
+    const result = gamesList.findIndex((game) => game.id === parseInt(gameId))
+    // passer une image comme corps du modal
+    const modalBody = `<h4>ajoutez un formulaire pour modifier le jeu ici</h4>`
+    modifyModal("Mode Edition", modalBody)
+}
+
+function modifyModal(modalTitle,modalBody) {
+    // Écrir le nom du jeu dans le titre du modal
+    document.querySelector(".modal-title").textContent = modalTitle
+    document.querySelector(".modal-body").innerHTML = modalBody
+}
+
+const viewButtons = document.querySelectorAll(".view")
+viewButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        viewModal(e.target.getAttribute("data-view-id"))
+    })
+})
+
+function viewModal(gameId) {
+    // console.log(gameId, gamesList)
+    // Trouvez le jeu en fonction de son identifiant
+    const result = gamesList.findIndex((game) => game.id === parseInt(gameId))
+    const modalBody = `<img src="${gamesList[result].imageUrl}" alt="${gamesList[result].title}" class="img-fluid" />`
+    modifyModal(gamesList[result].title, modalBody)
+}
