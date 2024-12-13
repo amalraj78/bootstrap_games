@@ -17,21 +17,21 @@ const gamesList = [
         pays: "Malaisie",
         ville: "Langkawi",
         imageUrl:
-            "https://pic.clubic.com/v1/images/1934271/raw?fit=smartCrop&width=1200&height=675&hash=e7519a9577a2b7291fa26880bb22bed6740836be",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSogifWSNdsY3OUm3qmKKwSYgGEOLnZ24062Q&s",
         id: 3,
     },
     {
         pays: "Indonésie",
         ville: "Lombok",
         imageUrl:
-            "https://gaming-cdn.com/images/products/671/orig/street-fighter-v-pc-jeu-steam-cover.jpg?v=1662539255",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCLe0bzKljQAjQMN_p-rRZEKrg8MWMygDT2Q&s",
         id: 4,
     },
     {
         pays: "Chine",
-        ville: "Zhangjiajie \n",
+        ville: "Zhangjiajie",
         imageUrl:
-            "https://gaming-cdn.com/images/products/2284/orig/half-life-2-pc-mac-game-steam-cover.jpg?v=1650555068",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKDCmN0kt0Yzq-47_vz2jv6CKv44r5OlecHQ&s",
         id: 5,
     },
     {
@@ -137,6 +137,7 @@ function editModal(gameId) {
             })
             document
                 .querySelector('button[type="submit"]')
+                //.preventDefault()
                 .addEventListener("click", () =>
                     updateGames(ville.value, pays.value, imageUrl.value, gameId)
                 )
@@ -149,28 +150,6 @@ function modifyFom(gameData) {
     form.ville.value = gameData.ville
     form.pays.value = gameData.pays
     form.imageUrl.value = gameData.imageUrl
-}
-
-function modifyModal(modalTitle, modalBody) {
-    // Écrir le nom du jeu dans le titre du modal
-    document.querySelector(".modal-title").textContent = modalTitle
-    document.querySelector(".modal-body").innerHTML = modalBody
-}
-
-function viewModal(gameId) {
-    // console.log(gameId, gamesList)
-    // Trouvez le jeu en fonction de son identifiant
-    const result = gamesList.findIndex((game) => game.id === parseInt(gameId))
-    // passer une image comme corps du modal
-    const modalBody = `<img src="${gamesList[result].imageUrl}" alt="${gamesList[result].ville}" class="img-fluid" />`
-    modifyModal(gamesList[result].ville, modalBody)
-    // edit footer
-    // Écrire dans le footer
-    document.querySelector(".modal-footer").innerHTML = `
-		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-			Close
-		</button>
-</form>`
 }
 
 function updateGames(ville, pays, imageUrl, gameId) {
