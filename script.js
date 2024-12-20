@@ -175,3 +175,28 @@ function updateGames(ville, pays, imageUrl, gameId) {
         })
     })
 }
+
+// initialize variable
+let carsList
+
+fetch("http://localhost:3000/api/cars", {
+    method: "GET",
+    headers: {
+        "x-api-key": "secret_phrase_here",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+    },
+})
+    .then((res) => {
+        if (!res.ok) {
+            console.log("your API isn't working !!!")
+        }
+        res.json().then((data) => {
+            console.log(data)
+            carsList = data // Mise à jour de la liste des voitures avec les données récupérées
+            writeDom()  // APRÈS que les données aient été récupérées
+        })
+    })
+    .catch((error) =>
+        console.error("Erreur lors de la récupération des voitures :", error)
+    )
