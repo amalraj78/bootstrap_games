@@ -25,6 +25,8 @@ form.addEventListener("submit", (e) => {
     logIn(formdata)
 })
 
+
+
 // input validation
 
 function validateName(input) {

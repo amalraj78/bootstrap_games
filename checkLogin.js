@@ -28,6 +28,8 @@ function checkLogIn() {
                     return (window.location = "/")
                 }
                 console.log(window.location.pathname)
+                console.log("logged");
+                
                 const loggedInBtn = document.querySelector("header")
                 const userImg = localStorage.getItem("img")
                 loggedInBtn.innerHTML = `
@@ -35,7 +37,7 @@ function checkLogIn() {
 				href="/"
 				class="d-flex align-items-center text-white text-decoration-none text-bg-secondary p-3"
 			>
-				<span class="fs-4 text-center">Games</span>
+				<span class="fs-4 text-center">Voitures</span>
 			</a>
 			<button
 				class="d-flex align-items-center text-white text-decoration-none btn p-3 log-out"
